@@ -1,0 +1,42 @@
+body {
+  background-color: azure;
+  margin: 50px
+}
+h1 {
+  font-family: verdana;
+  font-size: 250%;
+}
+h2 {
+  font-family: verdana;
+  font-size: 175%;
+}
+p {
+  font-family: verdana;
+  font-size: 120%;
+}
+i {
+  font-family: verdana;
+  font-size: 120%;
+}
+pre {
+  font-family: verdana;
+  font-size: 120%;
+}
+table {
+  font-family: verdana;
+  font-size: 120%;
+  margin:60px
+}
+form {
+  font-family: verdana;
+  font-size: 120%;
+  margin:60px
+}
+code {
+  font-family: verdana;
+  font-size: 120%;
+}
+ul {
+  font-family: verdana;
+  font-size: 120%;
+}

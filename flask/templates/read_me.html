@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Info</title>
+</head>
+<body>
+   <h1> Data Simulations for Timepix3</h1>
+   <i> David Amorim (2538354a@student.gla.ac.uk), 2022 </i>
+
+   <h2> General </h2>
+   <p> The Python files &quot;counters.py&quot;, &quot;time_conversion.py&quot;, &quot;hits.py&quot; , &quot;packing.py&quot; and
+       &quot;generate.py&quot; together provide functionality to generate simulated hit data for the
+       Timepix3 ASIC in ToA &amp; ToT mode and ToA Only mode (with superpixel VCO enabled).</p>
+
+   <h2> Requirements </h2>
+   <p> Due to various dependencies the files should be kept in the same  directory to ensure
+       the code runs without problems. The &quot;numpy&quot; and &quot;pandas&quot; modules are also required to
+       execute most relevant functions. The module &quot;warnings&quot; is used to surpress some
+       compiler outputs but not relevant to code execution. The modules &quot;matplotlib&quot; and
+&quot;celluloid&quot; are needed to visualise hit data (using the function &quot;visualise()&quot; in
+&quot;generate.py&quot;). </p>
+
+   <h2> Help </h2>
+   <p> Each file contains a detailed header comment as well as various in-line comments
+       giving information on individual functions. Reference is made to the Timepix3 Manual
+       v1.9 at various points. </p>
+
+   <h2> Usage </h2>
+   <p> The function &quot;simulate()&quot; in &quot;generate.py&quot; is a general-purpose function to generate
+       random hit data. It processes the hits and writes the resulting 48-bit packets to a
+       binary output file. Further, a csv file containing the pixel address, timing data
+       and decoded pixel counter values for each generated hit is created.
+       The function takes the following arguments: </p>
+
+       <ul>
+            <li> <i>N</i>: integer number of hits to be generated</li>
+            <li><i>op_mode</i>: operation mode; 0 for ToA &amp; ToT, 1 for ToA Only [optional; default: 0]</li>
+            <li><i>bin_name</i>: name of the binary output file [optional; default: &quot;packets.bin&quot;]</li>
+            <li><i>csv_name</i>: name of the csv output file [optional; default: &quot;values.csv&quot;]</li>
+       </ul>
+
+    <p> If the function executes without error it returns &quot;0&quot;.  </p>
+
+    <p> As an example, the following terminal input (in the appropriate directory) will generate
+        150 hits in ToA &amp ToT mode (with default names for the output files): </p>
+
+        <pre>
+            <code>
+                    [user dir]$  python3
+                    &gt;&gt;&gt; from generate import simulate
+                    &gt;&gt;&gt; simulate(150)
+                    0
+                    &gt;&gt;&gt;
+            </code>
+        </pre>
+
+    <p> Using the comments and descriptions provided in the individual files, functions can also
+        be combined into more purpose-built tools for specific applications involving Timepix3 pixel
+        encoding/decoding, packing/unpacking of bit packets, etc. A useful tool, for example, is
+the function &quot;visualise()&quot; in &quot;generate.py&quot; which can be used to create animated gifs to
+visualise hit data. </p>
+
+    <h2> Computational Time </h2>
+
+    <p> Most of the code in this package was not written with optimisation of computational time in mind.
+        This results in rather slow execution for larger data sets. The results of some tests on the
+        function &quot;simulate()&quot; (described above) are shown below. They indicate that the time it takes to
+        generate a given number of hits scales linearly with the number of hits, taking &sim;10ms for each hit: </p>
+
+        <table>
+              <tr>
+                    <th>Number of Hits</th>
+                    <th>Time</th>
+              </tr>
+              <tr>
+                    <td>10</td>
+                    <td>&sim;0.1s </td>
+              </tr>
+              <tr>
+                    <td>100</td>
+                    <td>&sim;1s</td>
+              </tr>
+              <tr>
+                    <td>1000</td>
+                    <td>&sim;10s</td>
+              </tr>
+              <tr>
+                    <td>10,000</td>
+                    <td>&sim;120s</td>
+              </tr>
+              <tr>
+                    <td>100,000</td>
+                    <td>&sim;1100s</td>
+              </tr>
+
+        </table>
+
+        <p> NOTE THAT A SINGLE GENERATED PARTICLE DETECTION CORRESPONDS TO &sim;10 GENERATED HITS.  </p>
+
+</body>
+</html>

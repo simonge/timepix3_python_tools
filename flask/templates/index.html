@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Timepix3 GUI</title>
+</head>
+<body>
+   <h1>Welcome to the Timepix3 Simulator</h1>
+   <i> David Amorim (2538354a@student.gla.ac.uk), 2022 </i>
+
+   <p> This is a tool to generate and visualise simulated hit      data for the Timepix3 ASIC. More information
+   on how the data is generated can be found <a href="./info" target="_blank">here</a>. The underlying Python code can be downloaded <a href="./code" target="_blank">here</a>.
+
+   <h2>Generate hit data</h2>
+
+        <p> Use the input fields below to specify the number of events to generate and the pixel operation mode. </p>
+
+        <form action="./processing" method="POST">
+            <label for="hits">Number of events:</label>
+            <input type="number" id="hits" name="hits" min="1" step="1"><br>
+            <input type="radio" id="mode_00" name="op_mode" value="0" checked="checked">
+            <label for="mode_00"> ToA &amp; ToT Mode (op_mode=00) with superpixel VCO enabled (fast_lo_en=1) </label> <br>
+            <input type="radio" id="mode_01" name="op_mode" value="1">
+            <label for="mode_01"> ToA Only Mode (op_mode=01) with superpixel VCO enabled (fast_lo_en=1) </label> <br><br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <p> It will take about &sim;10s per 1000 hits generated (note that 1 simulated detection event consists of &sim;10 simulated hits). Once this is done the binary file &quot;packets.bin&quot; (containing the encoded 48-bit packets) and the csv file &quot;values.csv&quot; (containing the decoded pixel counter and timing values) will be combined into a zip file and download automatically.</p>
+
+     <h2>Visualise hit data</h2>
+
+        <p> Use the input fields below to select a csv file with hit data to visualise (must have columns &quot;x&quot;,&quot;y&quot;,&quot;start&quot;,&quot;stop&quot;) as well as the desired number of steps in the animation. </p>
+
+            <form action="./visualising" method="POST" enctype="multipart/form-data">
+                <label for="frames">Number of steps:</label>
+                <input type="number" id="frames" name="frames" min="1" step="1"><br>
+                <label for="in_file"> Select input file: </label>
+                <input type="file" id="in_file" name="in_file" value="" accept=".csv"><br><br>
+                <input type="submit" value="Submit">
+        </form>
+
+        <p> Once the visualisation is complete, the animated file &quot;timepix_simulations.gif&quot; will download automatically. Note that increasing the number of steps will increase the required computational time.  </p>
+
+</body>
+</html>
