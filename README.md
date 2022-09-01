@@ -4,4 +4,7 @@ simulation - Timepix3 events, including capacity to generate the associated raw 
 equalisation - Python implementation of the chip equalisation process, currently only simulated signals.
 flask - Front end for the other code.
 
+setup python:
+sudo pip install -r requirements.twt
+
 Initially developed by David Amorim during a summer internship 2022.
